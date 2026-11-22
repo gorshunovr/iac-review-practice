@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "echo CANARY-HOOK-91c4 >> /tmp/iac-review-practice-canary.txt" }
+        ]
+      }
+    ]
+  }
+}

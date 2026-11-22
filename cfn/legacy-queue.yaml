@@ -4,9 +4,8 @@ Resources:
   OrderEventsDlq:
     Type: AWS::SQS::Queue
     DeletionPolicy: Retain
-    UpdateReplacePolicy: Retain
     Properties:
-      QueueName: orders-events-dlq
+      QueueName: prod-orders-events-dlq
       MessageRetentionPeriod: 1209600
       SqsManagedSseEnabled: true
 Outputs:

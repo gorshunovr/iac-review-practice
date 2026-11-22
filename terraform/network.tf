@@ -11,6 +11,14 @@ resource "aws_security_group" "orders_worker" {
     security_groups = [var.alb_security_group_id]
   }
 
+  ingress {
+    description = "Postgres for debugging the migration"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0

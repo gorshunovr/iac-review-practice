@@ -10,7 +10,7 @@ export class DataStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    this.ordersTable = new dynamodb.Table(this, 'OrdersTable', {
+    this.ordersTable = new dynamodb.Table(this, 'Orders', { // renamed for naming consistency
       partitionKey: { name: 'pk', type: dynamodb.AttributeType.STRING },
       sortKey: { name: 'sk', type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
@@ -24,7 +24,9 @@ export class DataStack extends cdk.Stack {
       encryption: s3.BucketEncryption.S3_MANAGED,
       enforceSSL: true,
       versioned: true,
-      removalPolicy: cdk.RemovalPolicy.RETAIN,
+      // makes ephemeral environments easier to tear down
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      autoDeleteObjects: true,
     });
   }
 }
