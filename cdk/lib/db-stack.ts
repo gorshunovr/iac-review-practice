@@ -21,8 +21,9 @@ export class DbStack extends cdk.Stack {
       vpcSubnets: { subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS },
       credentials: rds.Credentials.fromGeneratedSecret('orders_admin'),
       storageEncrypted: true,
-      deletionProtection: true,
-      removalPolicy: cdk.RemovalPolicy.SNAPSHOT,
+      // ownership moves to terraform/rds.tf, so CDK must be able to let go of it
+      deletionProtection: false,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
   }
 }

@@ -21,6 +21,8 @@ export class ApiStack extends cdk.Stack {
       environment: {
         TABLE_NAME: props.table.tableName,
         DB_SECRET_ARN: props.dbCluster.secret!.secretArn,
+        // TODO remove once the driver supports Secrets Manager
+        DB_PASSWORD: props.dbCluster.secret!.secretValueFromJson('password').unsafeUnwrap(),
       },
     });
 

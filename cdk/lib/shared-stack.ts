@@ -8,9 +8,9 @@ export class SharedStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    this.vpc = new ec2.Vpc(this, 'Vpc', { availabilityZones: ['eu-west-2a', 'eu-west-2b'], natGateways: 1 });
+    this.vpc = new ec2.Vpc(this, 'Vpc', { availabilityZones: ['eu-west-2a', 'eu-west-2b', 'eu-west-2c'], natGateways: 3 });
 
-    // Consumed by the legacy reporting stack (deployed from another repo) via Fn::ImportValue
-    new cdk.CfnOutput(this, 'VpcIdExport', { value: this.vpc.vpcId, exportName: 'orders-vpc-id' });
+    // Terraform now reads the VPC id from SSM, export no longer needed
+    new cdk.aws_ssm.StringParameter(this, 'VpcIdParam', { parameterName: '/orders/vpc-id', stringValue: this.vpc.vpcId });
   }
 }

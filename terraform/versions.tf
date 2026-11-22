@@ -4,17 +4,11 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 5.70"
     }
   }
 
-  backend "s3" {
-    bucket         = "orders-platform-tfstate"
-    key            = "orders/prod/terraform.tfstate"
-    region         = "eu-west-2"
-    dynamodb_table = "orders-platform-tflock"
-    encrypt        = true
-  }
+  # temporarily local while we sort out state locking permissions
+  backend "local" {}
 }
 
 provider "aws" {

@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "logs" {
   bucket = "orders-${var.environment}-access-logs"
+  acl    = "private"
 }
 
 resource "aws_s3_bucket_public_access_block" "logs" {
