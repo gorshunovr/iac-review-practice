@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Legacy dead-letter queue for order events (deployed manually, stack name orders-legacy-dlq)
+Resources:
+  OrderEventsDlq:
+    Type: AWS::SQS::Queue
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      QueueName: orders-events-dlq
+      MessageRetentionPeriod: 1209600
+      SqsManagedSseEnabled: true
+Outputs:
+  DlqArn:
+    Value: !GetAtt OrderEventsDlq.Arn
+    Export:
+      Name: orders-events-dlq-arn

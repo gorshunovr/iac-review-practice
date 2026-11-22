@@ -1,0 +1,25 @@
+name: ci
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  cdk:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: cdk } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: npm install --ignore-scripts
+      - run: npx cdk synth --quiet
+        env: { CDK_DEFAULT_ACCOUNT: "111111111111", CDK_DEFAULT_REGION: eu-west-2 }
+  terraform:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: terraform } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check -recursive
+      - run: terraform init -backend=false
+      - run: terraform validate
