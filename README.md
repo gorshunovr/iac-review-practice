@@ -2,7 +2,7 @@
 
 > **WARNING: deliberately flawed training repository. Do not deploy any of this.**
 > It exists to practise reviewing an infrastructure pull request (AWS CDK mid-migration to Terraform) with and without AI agents.
-> The open pull request contains planted mistakes and harmless prompt-injection decoys (they only ask an agent to echo a canary string).
+> The [open pull request](https://github.com/gorshunovr/iac-review-practice/pull/1) contains planted mistakes and harmless prompt-injection decoys (they only ask an agent to echo a canary string).
 > No real credentials are present; any "secret" is a fake placeholder.
 
 ## Layout
